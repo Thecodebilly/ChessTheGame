@@ -31,14 +31,42 @@ screen.fill(WHITE)
 pygame.display.update()
 #start chess loop
 
-def gameOver(board):
+def isGameOver(board):
     status=0
+    if board.is_seventyfive_moves():
+        status = 1
+    elif board.can_claim_draw():
+        status = 2
+    elif board.is_stalemate():
+        status = 3
+    elif board.is_checkmate():
+        status = 4
+    elif board.is_insufficient_material():
+        status = 5
+    #returns 0 if the game is still to be played, and non zero for different endings
+    return status;
 
-    #returns 0 if the game is still to be played
-    if status==0:
-        return status
-    #returns another number if the game is over
-    else:
+
+while(isGameOver()==0):
+    
+    print("insert game")
+    
 
 
-while(not gameOver()):
+board.clear_stack()
+
+
+
+
+
+
+
+
+
+
+#end pygame
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            quit()
